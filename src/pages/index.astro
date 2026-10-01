@@ -1,11 +1,182 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const song = {
+  title: "En qué momento",
+  file: "/audio/en-que-momento.mp3",
+};
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={song.title} />
+    <title>{song.title}</title>
+  </head>
+
+  <body>
+
+    <!-- PLAYER -->
+    <main>
+      <section class="listen">
+        <div class="player">
+          <p>{song.title}</p>
+
+          <audio controls preload="metadata" src={song.file}>
+            Tu navegador no puede reproducir este audio.
+          </audio>
+        </div>
+      </section>
+
+      <!-- LETRA -->
+      <section class="lyrics">
+        <div class="lyrics-inner">
+
+          <p>
+            ¿En qué momento<br />
+            pasé al pasado?<br />
+            Ilusionado<br />
+            del otro lado
+          </p>
+
+          <p>
+            Y cuánto tiempo<br />
+            es que ha pasado<br />
+            no hemos hablado<br />
+            ningún contacto
+          </p>
+
+          <p>
+            si me preguntan por ti, ¿qué voy a decirles?<br />
+            fui yo quien tiró todo esto<br />
+            o que murió en el intento<br />
+            si me preguntan cómo es que llegamos a esto<br />
+            fuimos tan cercanos, bebé<br />
+            más cercanos que un beso
+          </p>
+
+          <p>
+            sin ti yo he estado<br />
+            desconectado<br />
+            las cosas buenas<br />
+            han terminado<br />
+            los años libres<br />
+            sueño dorado
+          </p>
+
+          <p>
+            si me preguntan por ti, ¿qué voy a decirles?<br />
+            fui yo quien tiró todo esto<br />
+            o que murió en el intento<br />
+            si me preguntan cómo es que llegamos a esto<br />
+            fuimos tan cercanos, bebé<br />
+            más cercanos que un beso
+          </p>
+
+        </div>
+      </section>
+    </main>
+
+  </body>
+</html>
+
+<style>
+  :global(*) {
+    box-sizing: border-box;
+  }
+
+  :global(html) {
+    background: #101112;
+  }
+
+  :global(body) {
+    margin: 0;
+    background: #101112;
+    color: #d8d4ca;
+    font-family: Georgia, "Times New Roman", serif;
+  }
+
+  /* PLAYER */
+
+  .listen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #101112;
+  }
+
+  .player {
+    width: min(82%, 420px);
+    text-align: center;
+  }
+
+  .player p {
+    margin: 0 0 1rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+  }
+
+  audio {
+    width: 100%;
+  }
+
+  /* LETRA */
+
+  .lyrics {
+    /* The dark wash runs for a fixed 140vh no matter how long the
+       lyrics are, then settles on the final light colour. */
+    background-color: #c7c0b2;
+    background-image: linear-gradient(
+      to bottom,
+      #101112 0%,
+      #292826 25%,
+      #5e5a53 50%,
+      #928b80 75%,
+      #c7c0b2 100%
+    );
+    background-repeat: no-repeat;
+    background-size: 100% 140vh;
+  }
+
+  .lyrics-inner {
+    width: min(88%, 520px);
+    margin: 0 auto;
+    padding: 65vh 0 40vh;
+    text-align: center;
+
+    /* Dark ink. While the background is still dark the words blend in,
+       then they surface on their own as the background washes out. */
+    color: #242321;
+
+    /* "Letter Gothic Std" is an Adobe font. Load it via Adobe Fonts
+       (/adobe-fonts or Typekit) or a self-hosted @font-face; the stack
+       falls back to any available monospace face otherwise. */
+    font-family: "Letter Gothic Std", "Letter Gothic", ui-monospace,
+      "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace;
+    font-size: 18px;
+    line-height: 1.55;
+    letter-spacing: 0;
+  }
+
+  .lyrics p {
+    margin: 0 0 28px;
+  }
+
+  /* MOBILE */
+
+  @media (max-width: 600px) {
+    .player {
+      width: 84%;
+    }
+
+    .lyrics-inner {
+      padding-left: 9vw;
+      padding-right: 9vw;
+    }
+
+    .lyrics p {
+      margin-bottom: 6rem;
+    }
+  }
+</style>
