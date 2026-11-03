@@ -1,0 +1,59 @@
+---
+import { songs } from "../data/songs";
+const { current } = Astro.props;
+---
+
+<nav class="song-nav">
+  {songs.map((s) => {
+    const isCurrent = s.slug === current;
+    return (
+      <a
+        href={isCurrent ? undefined : `/songs/${s.slug}`}
+        class:list={["song-link", { active: isCurrent }]}
+        aria-current={isCurrent ? "page" : undefined}
+      >
+        {s.title}
+      </a>
+    );
+  })}
+</nav>
+
+<style>
+  .song-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+    background: rgba(16, 17, 18, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    z-index: 20;
+  }
+
+  .song-link {
+    color: #d8d4ca;
+    text-decoration: none;
+    opacity: 1;
+    transition: opacity 0.2s, color 0.2s;
+  }
+
+  .song-link:hover {
+    opacity: 0.75;
+  }
+
+  /* the song we're already on: dimmed, no underline, not clickable */
+  .song-link.active {
+    color: #6f6b63;
+    opacity: 0.6;
+    cursor: default;
+    pointer-events: none;
+  }
+</style>

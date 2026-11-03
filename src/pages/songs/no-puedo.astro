@@ -1,0 +1,194 @@
+---
+import SongNav from "../../components/SongNav.astro";
+import { songs } from "../../data/songs";
+
+const song = {
+  title: "No puedo",
+  file: "/audio/no-puedo.mp3",
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={song.title} />
+    <title>{song.title}</title>
+  </head>
+
+  <body>
+
+    <!-- SONG NAV -->
+    <SongNav current="no-puedo" />
+
+    <!-- PLAYER -->
+    <main>
+      <section class="listen">
+        <div class="player">
+          <p>{song.title}</p>
+
+          <audio controls preload="metadata" src={song.file}>
+            Tu navegador no puede reproducir este audio.
+          </audio>
+        </div>
+      </section>
+
+      <!-- LETRA -->
+      <section class="lyrics">
+        <div class="lyrics-inner">
+
+          <p>
+            Esta noche entiéndeme a mí<br />
+            No conozco el amor<br />
+            Nunca tuve el valor<br />
+            Creo lo más parecido<br />
+            Fue haberte conocido
+          </p>
+
+          <p>
+            Y ahora tú me dices que aquí ya no hay nada<br />
+            Creo que todos mis planes me explotaron en cara<br />
+            Que sepas que
+          </p>
+
+          <p>
+            No puedo<br />
+            Olvidar lo que siento<br />
+            Ven, dime que no es cierto<br />
+            Lo nuestro no está muerto<br />
+            Tú sabes que no puedo<br />
+            Olvidar nuestra historia<br />
+            Guardarte en mi memoria<br />
+            Recuerdo aquella euforia<br />
+            Tú sabes que no puedo
+          </p>
+
+          <p>
+            Esta noche entiéndeme a mí<br />
+            No conozco el amor<br />
+            Nunca tuve el valor<br />
+            Creo lo más parecido<br />
+            Fue haberte conocido<br />
+            Que sepas que
+          </p>
+
+          <p>
+            No puedo<br />
+            Olvidar lo que siento<br />
+            Yo vivo en el momento<br />
+            Te pienso todo el tiempo<br />
+            Tú sabes que no puedo<br />
+            Olvidar nuestra historia<br />
+            Guardarte en mi memoria<br />
+            Recuerdo aquella euforia<br />
+            Tú sabes que no puedo
+          </p>
+
+        </div>
+      </section>
+    </main>
+
+  </body>
+</html>
+
+<style>
+  :global(*) {
+    box-sizing: border-box;
+  }
+
+  :global(html) {
+    background: #101112;
+  }
+
+  :global(body) {
+    margin: 0;
+    background: #101112;
+    color: #d8d4ca;
+    font-family: Georgia, "Times New Roman", serif;
+  }
+
+  /* PLAYER */
+
+  .listen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #101112;
+  }
+
+  .player {
+    width: min(82%, 420px);
+    text-align: center;
+  }
+
+  .player p {
+    margin: 0 0 1rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+  }
+
+  audio {
+    width: 100%;
+  }
+
+  /* LETRA */
+
+  .lyrics {
+    /* The dark wash runs for a fixed 140vh no matter how long the
+       lyrics are, then settles on the final light colour. */
+    background-color: #c7c0b2;
+    background-image: linear-gradient(
+      to bottom,
+      #101112 0%,
+      #292826 25%,
+      #5e5a53 50%,
+      #928b80 75%,
+      #c7c0b2 100%
+    );
+    background-repeat: no-repeat;
+    background-size: 100% 140vh;
+  }
+
+  .lyrics-inner {
+    width: min(88%, 520px);
+    margin: 0 auto;
+    padding: 65vh 0 40vh;
+    text-align: center;
+
+    /* Dark ink. While the background is still dark the words blend in,
+       then they surface on their own as the background washes out. */
+    color: #242321;
+
+    /* "Letter Gothic Std" is an Adobe font. Load it via Adobe Fonts
+       (/adobe-fonts or Typekit) or a self-hosted @font-face; the stack
+       falls back to any available monospace face otherwise. */
+    font-family: "Letter Gothic Std", "Letter Gothic", ui-monospace,
+      "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace;
+    font-size: 18px;
+    line-height: 1.55;
+    letter-spacing: 0;
+  }
+
+  .lyrics p {
+    margin: 0 0 28px;
+  }
+
+  /* MOBILE */
+
+  @media (max-width: 600px) {
+    .player {
+      width: 84%;
+    }
+
+    .lyrics-inner {
+      padding-left: 9vw;
+      padding-right: 9vw;
+    }
+
+    .lyrics p {
+      margin-bottom: 6rem;
+    }
+  }
+</style>
